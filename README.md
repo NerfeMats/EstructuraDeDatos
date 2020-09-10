@@ -1,4 +1,4 @@
 # EstructuraDeDatos
 
-Los código que aparecen en los pdf se utilizarón para explicar algunos conceptos iniciales. Se usaron sólo para ejemplificar. Saludos
+Los código que aparecen en los pdf se utilizaron para explicar algunos conceptos iniciales y sobre todo ejemplificar. Saludos
 Comunidad UAM AZC.
