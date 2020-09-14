@@ -3,17 +3,19 @@
 using namespace std;
 
 class cNodo{
-private:
-int data;
+private:     // especificador acceso
+int data;                   //atributos
 cNodo* sig;
 
-public:
-cNodo(int d, cNodo* s){
+public:    // especificador de acceso , tambien existen protected (herencia) private
+cNodo(int d, cNodo* s = NULL){   //constructor
     data=d;
     sig=s;
+    imprimiNodo();
+
 }
 
-int getData(){
+int getData(){          // interfaz de clase
 return data;
 }
 
@@ -28,26 +30,44 @@ cout<<"direccion de ptr"<<sig<<endl;
 
 }
 
-cNodo(){
+cNodo(){       // contructor
 
 }
-//friend int main();
+
+
+friend int main();
 };
 
 
 int main()
 {
-cNodo primerNodo(1000,NULL);
+
+cNodo primerNodo(1);
 //primerNodo.data=1;
 //primerNodo.sig=NULL;
 //cout<<"primerNodo: "<<primerNodo.getData()<<endl;
 //cout<<"direccion de  ptr sig: "<<primerNodo.getSig()<<endl;
-primerNodo.imprimiNodo();
+//primerNodo.imprimiNodo();
 
-cNodo *ptrPrimerNodo = new cNodo(13,0);
+
+
+cNodo *ptrPrimerNodo = new cNodo(13);
+
+
+primerNodo.sig = ptrPrimerNodo;
+cout<<"data: "<<primerNodo.getData()<<endl;
+cout<<"data: "<<primerNodo.sig->getData();
+cout<<endl;
+
+
+primerNodo.sig->sig = new cNodo(-14);
+cout<<primerNodo.sig->sig->getData();
+cout<<endl;
+
 //cout<<"data en ptr: "<<ptrPrimerNodo->getData()<<endl;
 //cout<<"direccion de  ptr sig: "<<ptrPrimerNodo->getSig()<<endl;
-ptrPrimerNodo->imprimiNodo();
+//ptrPrimerNodo->imprimiNodo();
+
     cout << "Hello world! uam azc" << endl;
     return 0;
 }
