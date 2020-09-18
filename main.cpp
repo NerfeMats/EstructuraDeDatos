@@ -11,7 +11,8 @@ public:    // especificador de acceso , tambien existen protected (herencia) pri
 cNodo(int d, cNodo* s = NULL){   //constructor
     data=d;
     sig=s;
-    imprimiNodo();
+    cout<<"Estado inicial: "<<endl;
+    imprimiNodo();  // imprimir el Estado inicial de mi objeto;
 
 }
 
@@ -25,8 +26,8 @@ return sig;
 
 void imprimiNodo()
 {
-cout<<"Primer Nodo: "<<data<<endl;
-cout<<"direccion de ptr"<<sig<<endl;
+cout<<"Nodo: "<<data<<endl;
+cout<<"sig: "<<sig<<endl;
 
 }
 
@@ -34,41 +35,71 @@ cNodo(){       // contructor
 
 }
 
-
+friend class cListaLigada;
 friend int main();
 };
 
 
-int main()
+class cListaLigada{
+
+cNodo * inicio;
+
+public:
+//void crearNodosDePrueba(){
+
+
+//inicio = new cNodo(1);
+//cNodo *ptrPrimerNodo = new cNodo(13);
+//inicio->sig = ptrPrimerNodo;
+//inicio->sig->sig = new cNodo(-14);
+//inicio->sig->sig->sig = new cNodo(-17);
+
+//}
+
+void agregarValor(int value)
 {
 
-cNodo primerNodo(1);
-//primerNodo.data=1;
-//primerNodo.sig=NULL;
-//cout<<"primerNodo: "<<primerNodo.getData()<<endl;
-//cout<<"direccion de  ptr sig: "<<primerNodo.getSig()<<endl;
-//primerNodo.imprimiNodo();
+if(inicio==NULL)
+    inicio=new cNodo(value);
+else
+{
+cNodo* ultimo;
+ultimo->sig = new cNodo(value);
+ultimo= ultimo->sig;
+}
+
+
+}
 
 
 
-cNodo *ptrPrimerNodo = new cNodo(13);
 
 
-primerNodo.sig = ptrPrimerNodo;
-cout<<"data: "<<primerNodo.getData()<<endl;
-cout<<"data: "<<primerNodo.sig->getData();
-cout<<endl;
+void imprimir(){
+cNodo * aux = inicio;
 
 
-primerNodo.sig->sig = new cNodo(-14);
-cout<<primerNodo.sig->sig->getData();
-cout<<endl;
+while(aux!=NULL)
+{
+aux->imprimiNodo();
+aux=aux->sig;
+}
 
-//cout<<"data en ptr: "<<ptrPrimerNodo->getData()<<endl;
-//cout<<"direccion de  ptr sig: "<<ptrPrimerNodo->getSig()<<endl;
-//ptrPrimerNodo->imprimiNodo();
 
-    cout << "Hello world! uam azc" << endl;
+}
+
+};
+
+
+
+
+int main()
+{
+   cListaLigada milista;
+   //milista.crearNodosDePrueba();
+   milista.imprimir();
+
+
     return 0;
 }
 
