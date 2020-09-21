@@ -8,12 +8,21 @@ int data;                   //atributos
 cNodo* sig;
 
 public:    // especificador de acceso , tambien existen protected (herencia) private
-cNodo(int d, cNodo* s = NULL){   //constructor
+cNodo(int d, cNodo* s = NULL)/*sig(NULL)*/{   //constructor
     data=d;
     sig=s;
-    cout<<"Estado inicial: "<<endl;
-    imprimiNodo();  // imprimir el Estado inicial de mi objeto;
+   // sig = NULL;
+   // cout<<"Estado inicial: "<<endl;
+  //  imprimiNodo();  // imprimir el Estado inicial de mi objeto;
 
+}
+
+void setData(int d){
+
+if(d>=0)
+data=d;
+else
+    cout<<"ingresa otro numero con actitud positiva";
 }
 
 int getData(){          // interfaz de clase
@@ -43,27 +52,26 @@ friend int main();
 class cListaLigada{
 
 cNodo * inicio;
-
+cNodo* ultimo;
 public:
-//void crearNodosDePrueba(){
 
 
-//inicio = new cNodo(1);
-//cNodo *ptrPrimerNodo = new cNodo(13);
-//inicio->sig = ptrPrimerNodo;
-//inicio->sig->sig = new cNodo(-14);
-//inicio->sig->sig->sig = new cNodo(-17);
-
-//}
+cListaLigada(){
+inicio=NULL;
+ultimo=NULL;
+}
 
 void agregarValor(int value)
 {
 
-if(inicio==NULL)
+if(inicio==NULL){
+
     inicio=new cNodo(value);
+     ultimo=inicio;
+}
 else
 {
-cNodo* ultimo;
+
 ultimo->sig = new cNodo(value);
 ultimo= ultimo->sig;
 }
@@ -72,15 +80,13 @@ ultimo= ultimo->sig;
 }
 
 
-
-
-
 void imprimir(){
 cNodo * aux = inicio;
 
 
 while(aux!=NULL)
 {
+cout<<"***"<<endl;
 aux->imprimiNodo();
 aux=aux->sig;
 }
@@ -90,14 +96,38 @@ aux=aux->sig;
 
 };
 
+class ProblemaQueRequiereUNED{
+int v;
+cListaLigada milista;
+public:
+void ingresarValorALista(){
 
+ for(int i=0; i<10000; i++)
+   milista.agregarValor(i);
+   }
+
+
+void imprimirVariablesDelProblema(){
+cout<<v;
+milista.imprimir();
+
+}
+
+};
 
 
 int main()
 {
-   cListaLigada milista;
+   ProblemaQueRequiereUNED miproblema;
+
+   miproblema.ingresarValorALista();
+   miproblema.imprimirVariablesDelProblema();
+
+
+
+
    //milista.crearNodosDePrueba();
-   milista.imprimir();
+
 
 
     return 0;
