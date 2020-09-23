@@ -61,6 +61,25 @@ inicio=NULL;
 ultimo=NULL;
 }
 
+void miPushFront(int value){
+cNodo* aux= NULL;
+
+if(!inicio) // inicio==NULL => inicio==0 => 0==0 V  ******  !0 =1 y !1= 0
+{           // !0 = 1  !1 = 0
+inicio=new cNodo(value);
+//ultimo=inicio;
+}
+else
+{
+cNodo * aux = new cNodo(value);
+aux->sig =inicio;
+inicio=aux;
+
+
+}
+
+}
+
 void agregarValor(int value)
 {
 
