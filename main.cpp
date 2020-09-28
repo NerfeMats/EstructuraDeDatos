@@ -33,7 +33,7 @@ cNodo* getSig(){
 return sig;
 }
 
-void imprimiNodo()
+void imprimirNodo()
 {
 cout<<"Nodo: "<<data<<endl;
 cout<<"sig: "<<sig<<endl;
@@ -45,7 +45,7 @@ cNodo(){       // contructor
 }
 
 friend class cListaLigada;
-friend int main();
+//friend int main();
 };
 
 
@@ -55,19 +55,31 @@ cNodo * inicio;
 cNodo* ultimo;
 public:
 
+ bool esVacia() // isEmpty
+ {
+  //if(inicio==NULL)
+  //  return true;
+
+ //else
+   // return false;
+
+ return (inicio==NULL)?true:false;
+
+
+ }
 
 cListaLigada(){
 inicio=NULL;
 ultimo=NULL;
 }
 
-void miPushFront(int value){
-cNodo* aux= NULL;
+void miPushFront(int value){  //PILA
 
-if(!inicio) // inicio==NULL => inicio==0 => 0==0 V  ******  !0 =1 y !1= 0
+
+if(esVacia()) // inicio==NULL => inicio==0 => 0==0 V  *f*****  !0 =1 y !1= 0
 {           // !0 = 1  !1 = 0
 inicio=new cNodo(value);
-//ultimo=inicio;
+ultimo=inicio;
 }
 else
 {
@@ -80,10 +92,10 @@ inicio=aux;
 
 }
 
-void agregarValor(int value)
+void miPushEnd(int value)  //COLA
 {
 
-if(inicio==NULL){
+if(esVacia()){
 
     inicio=new cNodo(value);
      ultimo=inicio;
@@ -98,6 +110,17 @@ ultimo= ultimo->sig;
 
 }
 
+void insertar(int aInsertar, int posAIns){
+cNodo* aux = new cNodo(aInsertar);
+//aux->sig = inicio;
+//inicio=aux;
+
+ultimo->sig=aux;
+ultimo=aux;
+
+
+
+}
 
 void imprimir(){
 cNodo * aux = inicio;
@@ -106,11 +129,53 @@ cNodo * aux = inicio;
 while(aux!=NULL)
 {
 cout<<"***"<<endl;
-aux->imprimiNodo();
+aux->imprimirNodo();
 aux=aux->sig;
 }
 
 
+}
+
+bool buscar(int abuscar){
+
+cNodo* aux = inicio;
+
+
+//if(abuscar==aux->getData())
+  //  return true;
+//else
+//{
+
+while(aux!=NULL)
+{
+
+if(abuscar==aux->getData())
+return true;
+
+
+    aux=aux->sig;
+}
+
+
+
+//}
+
+//objetivo buscar elemento en lista
+//preguntar si elemento esta en el primer
+
+//si esta regresar true
+
+//si no esta buscar en el siguiente nodo
+
+//si esta regresar true
+//si no esta buscar en el siguiente nodo
+
+
+
+
+
+
+return false;
 }
 
 };
@@ -119,11 +184,35 @@ class ProblemaQueRequiereUNED{
 int v;
 cListaLigada milista;
 public:
-void ingresarValorALista(){
 
- for(int i=0; i<10000; i++)
-   milista.agregarValor(i);
+void ingresarInputs(){
+
+cout<<"ingresar el valor v: ";
+cin>>v;
+
+//for(int i=0; i<v; i++)
+//   milista.miPushFront(i);
+
+
+ for(int i=0; i<v; i++)
+   {milista.miPushEnd(i);}
+
+    milista.insertar(-8,0);
+
+    milista.imprimir();
+
+   for(int i=0;i<v+10; i++)
+   if(milista.buscar(i)==true)
+   cout<<i<<":"<<"se encontro el elemento"<<endl;
+   else
+    cout<<"no se encontro"<<endl;
+
+
+  // for(int i=10; i<v+10; i++)
+  // milista.miPushEnd(i);
+
    }
+
 
 
 void imprimirVariablesDelProblema(){
@@ -139,8 +228,8 @@ int main()
 {
    ProblemaQueRequiereUNED miproblema;
 
-   miproblema.ingresarValorALista();
-   miproblema.imprimirVariablesDelProblema();
+   miproblema.ingresarInputs();
+   //miproblema.imprimirVariablesDelProblema();
 
 
 
