@@ -115,8 +115,51 @@ cNodo* aux = new cNodo(aInsertar);
 //aux->sig = inicio;
 //inicio=aux;
 
-ultimo->sig=aux;
-ultimo=aux;
+if(posAIns==0)
+   {
+
+    aux->sig=inicio;
+    inicio=aux;
+
+   }
+else                            //posAIns: 2
+{
+  cNodo* aux2= inicio;
+ int i=1;
+ while(i<posAIns && aux2!=NULL)
+    {aux2=aux2->sig;
+     i++;
+    }
+
+    if(aux2!=NULL)
+    {
+   aux->sig = aux2->sig;
+   aux2->sig =aux;
+    }
+    else{
+
+        ultimo->sig=aux;
+        cout<<"se inserto en la última posicion";
+
+    }
+
+    // 1
+//aux->sig= inicio->sig;
+//inicio->sig =aux;
+
+// pos 2
+
+//aux->sig = inicio->sig->sig;
+//inicio->sig->sig = aux;
+
+//pos 3
+//aux->sig = inicio->sig->sig->sig;
+//inicio->sig->sig->sig= aux;
+
+}
+
+//ultimo->sig=aux;
+//ultimo=aux;
 
 
 
@@ -196,16 +239,18 @@ cin>>v;
 
  for(int i=0; i<v; i++)
    {milista.miPushEnd(i);}
-
-    milista.insertar(-8,0);
-
+ cout<<"la lista antes de insertar:"<<endl;
     milista.imprimir();
 
-   for(int i=0;i<v+10; i++)
-   if(milista.buscar(i)==true)
-   cout<<i<<":"<<"se encontro el elemento"<<endl;
-   else
-    cout<<"no se encontro"<<endl;
+    milista.insertar(-8,2);
+    cout<<"la lista despues de insertar:"<<endl;
+    milista.imprimir();
+
+  // for(int i=0;i<v+10; i++)
+  // if(milista.buscar(i)==true)
+ //  cout<<i<<":"<<"se encontro el elemento"<<endl;
+ //  else
+  //  cout<<"no se encontro"<<endl;
 
 
   // for(int i=10; i<v+10; i++)
@@ -221,6 +266,18 @@ milista.imprimir();
 
 }
 
+void utilizarFuncionInsertar(){
+
+int pos=0;
+int valor=1000;
+
+milista.insertar(valor,pos);
+cout<<"la lista despues de insertar"<<valor<<endl;
+milista.imprimir();
+
+}
+
+
 };
 
 
@@ -231,7 +288,7 @@ int main()
    miproblema.ingresarInputs();
    //miproblema.imprimirVariablesDelProblema();
 
-
+ //miproblema.utilizarFuncionInsertar();
 
 
    //milista.crearNodosDePrueba();
