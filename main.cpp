@@ -221,7 +221,37 @@ return true;
 return false;
 }
 
+
+// tres funciones para ejercitar
+void borrar(int pos);
+
+void eliminarRepetidos();
+
+void borrarElemento(int n);
+//////
+
 };
+
+void cListaLigada::borrar(int pos)
+{
+
+}
+void cListaLigada::borrarElemento(int item)
+{
+
+
+
+}
+
+void cListaLigada::eliminarRepetidos(){
+// 1, 1 , 2 ,1 , 3, 3, 4, 5
+//despues de borrar
+// 1, 2, 3, 4, 5
+
+
+}
+
+
 
 class ProblemaQueRequiereUNED{
 int v;
