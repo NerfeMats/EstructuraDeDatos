@@ -232,13 +232,19 @@ void borrarElemento(int n);
 
 };
 
-void cListaLigada::borrar(int pos)
-{
+void cListaLigada::borrar(int pos) // borrar la posicion
+{ //pos: 3
+  //pos    0 1 2 3 4
+  //pre d  1,2,3,4,5
+  //pos d  1 2 3 5
 
 }
 void cListaLigada::borrarElemento(int item)
 {
+//item = 4
 
+//1, 2, 3, 4, 5
+//1, 2, 3, 5
 
 
 }
