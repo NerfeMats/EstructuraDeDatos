@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stdlib.h>
 using namespace std;
 
 
@@ -37,6 +37,7 @@ public:
     cListaDL()
     {
     nodoI=NULL;
+    nodoF=NULL;
     }
 
     bool esVacia(){
@@ -55,7 +56,7 @@ public:
       cNodo*aux= new cNodo(i);
       nodoF->sig =aux;
       aux->ant=nodoF;
-      //nodoF=nodoF->sig;
+      //nodoF=nodoF->sig; tambien se puede hacer de esta forma
       nodoF=aux;
 
     }
@@ -81,13 +82,31 @@ public:
       if(buscar(aBorrar)==true)
       {
         cNodo *aux = nodoI;
+        while(aux!=NULL && aux->data!=aBorrar )
+        aux=aux->sig;
+
         if(aux->data==aBorrar)
         {
-        nodoI=aux->sig;
-        nodoI->ant->sig=NULL;
-        nodoI->ant=NULL;
 
+          if(aux->ant!=NULL)
+          aux->ant->sig=aux->sig;
+          else nodoI=aux->sig;
+
+          if(aux->sig!=NULL)
+          aux->sig->ant=aux->ant;
+
+          aux->sig=NULL;
+          aux->ant=NULL;
+
+
+        //nodoI=aux->sig;
+        //nodoI->ant->sig=NULL;
+        //nodoI->ant=NULL;
         }
+        else
+            cout<<"no se encontro la informacion";
+
+
 
 
       }
@@ -107,7 +126,7 @@ public:
     {
       cNodo*aux= new cNodo(i);
       aux->sig=nodoI;
-      //nodoI->ant=aux;
+      nodoI->ant=aux;
       nodoI=aux;
 
     }
@@ -148,6 +167,11 @@ cout<<"Tus datos son: "<<endl;
 
  }
 
+
+ void insertar(int val2Ins, int pos)
+ {
+ //tarea
+ }
 } ;
 
 class problemaQueNeedDTDL{
@@ -164,7 +188,7 @@ midoblementeL.imprimir();
 //  // se manda false porque se imprime del ultimo que entre al primero
 midoblementeL.borrar(0);
 midoblementeL.imprimir();
-midoblementeL.imprimir(reversa=false);
+//midoblementeL.imprimir(reversa=false);
 }
 
 };
