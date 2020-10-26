@@ -1,26 +1,85 @@
 #include <iostream>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 class cCoordenada{
     public:
 int x,y;
 
+cCoordenada(int x, int y)
+{
+this->x=x;
+this->y=y;
+}
+cCoordenada(){
+
+}
 };
 
 class cNodo{
-
+public:
 cCoordenada coord;
 
+cNodo(cCoordenada c)
+{
+this->coord=c;
+sig=NULL;
+}
+
 cNodo * sig;
+
+void imprimir()
+{
+cout<<"x:"<<coord.x<<" , "<<"y: "<<coord.y<<endl;
+}
 
 };
 
 
 class cPila{
-
+cNodo * head;
 public:
-    cPila(){}
+    cPila(){
+    head = NULL;
+    }
+    void miPush(cCoordenada c){
+
+        if(head==NULL)
+            head =new cNodo(c);
+        else
+        {
+            cNodo* aux = new cNodo(c);
+            aux->sig=head;
+            head=aux;
+        }
+
+
+    }
+
+    cCoordenada miPop(){
+    return head->coord;
+    }
+
+    void miQuitar(){
+    if(head!=NULL)
+    {
+    cNodo* aux= head;
+      head=head->sig;
+      aux->sig = NULL;
+    }
+     cout<<"no hay elementos en la pila"<<endl;
+
+    }
+
+    void imprimePila(){
+    cNodo* aux = head;
+
+    while(aux!=NULL)
+        aux->imprimir();
+
+    }
+
 
 };
 
@@ -38,15 +97,17 @@ public:
 cLaberinto(int filas, int columnas)
 {
 this->filas=filas;
+
 this->columnas=columnas;
 matriz = new int*[columnas];
 
 for(int i=0;i<filas;i++)
-matriz[i] = new int[filas];
+*(matriz+i) = new int[filas];
 /**/
 for(int i=0; i<filas;i++)
 for(int j=0; j<columnas;j++)
 matriz[i][j]=0;
+//*(*(matriz+i)+j)=0;
 
 }
 
@@ -61,9 +122,13 @@ void resuelveLaberinto(){
 void loadLaberinto(){
 ifstream in("laberinto.txt");
 
+
+
+
 if(in.is_open())
     {
     cout<<"exito al abrir el archivo"<<endl;
+
      in>>filas;
      in>>columnas;
 
@@ -104,6 +169,8 @@ for(int i=0;i<filas;i++)
 }
 
 };
+
+
 int main()
 {
     cLaberinto milaberinto;
@@ -112,6 +179,15 @@ milaberinto.loadLaberinto();
 milaberinto.imprimir();
 milaberinto.resuelveLaberinto();
 milaberinto.imprimir();
+cout<<":___________________"<<endl;
+
+cPila mipila;
+cCoordenada c(1,1);
+cCoordenada c1(2,1);
+
+mipila.miPush(c);
+mipila.miPush(c1);
+mipila.imprimePila();
 
     cout << "Hello world!" << endl;
     return 0;
