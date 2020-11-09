@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include<fstream>
 using namespace std;
 
 
@@ -23,10 +23,10 @@ this->description=descr;
 }
 cPelicula()
 {
-ifstream miEntrada("entrada.txt");
 
-si exito al abrir el archivo mandar msg
-sino error al abrir el archivo
+
+//si exito al abrir el archivo mandar msg
+//ino error al abrir el archivo
 
 }
 
@@ -59,6 +59,15 @@ cNodo*sig;
 cNodo*ant;
 // escribir constructores
 
+public:
+cNodo(cPelicula* p){
+pelicula=p;
+sig=NULL;
+ant=NULL;
+
+}
+
+
 void imprimir()
 {
 pelicula->toConsole();
@@ -70,19 +79,64 @@ pelicula->toConsole();
 class cListaPeliculas{
 cNodo * inicial;
 
-
+public:
 void agregarPeliculas();
 void eliminarPeliculas();
 void peliculasToJson();
-
-
 };
+
+void cListaPeliculas::agregarPeliculas(){
+ifstream miEntrada("entrada.txt");
+
+string id;
+string name;
+string picture;
+int likes;
+string webSite;
+string description;
+
+
+
+try{
+
+if(miEntrada.fail())
+    throw 5;
+cout<<"exito al abrir el archivo"<<endl;
+
+while(!miEntrada.eof())
+{
+miEntrada>>id;
+miEntrada>>name;
+miEntrada>>picture;
+miEntrada>>likes;
+miEntrada>>webSite;
+miEntrada>>description;
+
+inicial = new cNodo(new cPelicula(id, name, picture, likes, webSite, description));
+
+}
+
+}
+catch(int p){
+
+cerr<<"error al abrir el archivo: error  numero: "<<p;
+
+}
+
+}
+
+void cListaPeliculas::peliculasToJson()
+{
+
+
+
+}
 
 int main()
 {
     cListaPeliculas misMoviesFavoritas;
 
-    misMoviesFavoritas.agregar(); //
+    misMoviesFavoritas.agregarPeliculas(); //
     misMoviesFavoritas.peliculasToJson();
     cout << "Hello world!" << endl;
     return 0;
