@@ -1,9 +1,12 @@
 #include <iostream>
 #include<fstream>
+#include<stdlib.h>
+#include<stdio.h>
 using namespace std;
 
 
 class cPelicula{
+public:
 string id;
 string name;
 string picture;
@@ -32,12 +35,12 @@ cPelicula()
 
 void toConsole()
 {
-cout<<this->id;
-cout<<this->name;
-cout<<this->picture;
-cout<<this->likes;
-cout<<this->webSite;
-cout<<this->description;
+cout<<this->id<<endl;
+cout<<this->name<<endl;
+cout<<this->picture<<endl;
+cout<<this->likes<<endl;
+cout<<this->webSite<<endl;
+cout<<this->description<<endl;
 }
 
 void toJson()
@@ -52,9 +55,9 @@ void toJson()
 // generar una lista doblemente de Peliculas
 
 class cNodo{
-
+public:
 cPelicula * pelicula;
-
+// int n;
 cNodo*sig;
 cNodo*ant;
 // escribir constructores
@@ -102,24 +105,42 @@ try{
 if(miEntrada.fail())
     throw 5;
 cout<<"exito al abrir el archivo"<<endl;
+cNodo* aux;
 
-while(!miEntrada.eof())
-{
+string basura;
 miEntrada>>id;
-miEntrada>>name;
+getline(miEntrada,basura);
+getline(miEntrada,name);
 miEntrada>>picture;
 miEntrada>>likes;
 miEntrada>>webSite;
 miEntrada>>description;
-
 inicial = new cNodo(new cPelicula(id, name, picture, likes, webSite, description));
+aux=inicial;
+
+inicial->pelicula->toConsole();
+system("pause");
+while(!miEntrada.eof())
+{
+miEntrada>>id;
+getline(miEntrada,basura);
+getline(miEntrada,name);
+miEntrada>>picture;
+miEntrada>>likes;
+miEntrada>>webSite;
+miEntrada>>description;
+cout<<"0";
+aux->sig = new cNodo(new cPelicula(id, name, picture, likes, webSite, description));
+aux=aux->sig;
+
 
 }
 
 }
 catch(int p){
 
-cerr<<"error al abrir el archivo: error  numero: "<<p;
+
+cout<<"error al abrir el archivo: error  numero: "<<p;
 
 }
 
