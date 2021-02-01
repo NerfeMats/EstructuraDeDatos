@@ -32,6 +32,13 @@ cout<<"cantidad: "<<cantidad<<endl;
 };
 
 
+void imprimir(nodo* inicio)
+{
+//imprimir los nodos
+}
+
+
+
 string regresaNombre(int i){
 return "Producto"+to_string(i);
 }
@@ -47,12 +54,13 @@ return rand() % 20 +1;
 int main()
 {
 srand(time(NULL));
+
 int n;
 ProductoEnCarritoDeVentas* aux = NULL;
 cout<<"cuantos productos aleatorios en el carrito de ventas";
 cin>>n;
 // Haga que el programa compile y se ejecute sin errores
-ProductoEnCarritoDeVentas* inicio = new ProductoEnCarritoDeVentas(regresaNombre(rand()%n),numeroAleatorio() , precioAleatorio());
+ProductoEnCarritoDeVentas* inicio = new ProductoEnCarritoDeVentas(regresaNombre(rand()%n),numeroAleatorio(), precioAleatorio());
 
 
 aux = inicio;
@@ -60,10 +68,49 @@ aux = inicio;
 
 for(int i=0; i<n;i++){
 aux->sig= new ProductoEnCarritoDeVentas(regresaNombre(rand()%n),numeroAleatorio(),precioAleatorio());
+//aux->imprimir();
+aux=aux->sig;
+}
+
+aux=inicio;
+for(int i=0; i<n;i++){
 aux->imprimir();
 aux=aux->sig;
 }
 
+inicio->imprimir();
+/*segundo*/
+
+aux = NULL;
+cout<<"cuantos productos aleatorios en el carrito de ventas dos";
+cin>>n;
+// Haga que el programa compile y se ejecute sin errores
+
+ProductoEnCarritoDeVentas* inicio1 = new ProductoEnCarritoDeVentas(regresaNombre(rand()%n),numeroAleatorio(), precioAleatorio());
+
+aux = inicio1;
+//aux->imprimir();
+
+for(int i=0; i<n;i++){
+aux->sig= new ProductoEnCarritoDeVentas(regresaNombre(rand()%n),numeroAleatorio(),precioAleatorio());
+//aux->imprimir();
+aux=aux->sig;
+}
+
+aux=inicio1;
+for(int i=0; i<n;i++){
+aux->imprimir();
+aux=aux->sig;
+}
+
+inicio1->imprimir();
+
+
+aux=inicio1;
+for(int i=0; i<n;i++){
+aux->imprimir();
+aux=aux->sig;
+}
 
 
 
